@@ -9,7 +9,11 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "cmake.generator": "Ninja"
+                "cmake.generator": "Ninja",
+                "cmake.configureSettings": {
+                    "CMAKE_TOOLCHAIN_FILE": "${containerEnv:VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+                    "VCPKG_INSTALLED_DIR": "${containerEnv:VCPKG_INSTALLED_DIR}"
+                }
             },
             "extensions": [
                 "ms-vscode.cpptools",
