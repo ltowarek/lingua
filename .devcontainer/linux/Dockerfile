@@ -6,6 +6,7 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     ca-certificates \
     cmake \
     curl \
+    default-jre-headless \
     git \
     libcurl4-openssl-dev \
     libedit-dev \
@@ -27,3 +28,6 @@ RUN git clone https://github.com/microsoft/vcpkg.git $VCPKG_ROOT && \
 ENV VCPKG_INSTALLED_DIR="$VCPKG_ROOT/installed"
 COPY vcpkg.json /tmp/vcpkg.json
 RUN cd /tmp && vcpkg install
+
+ENV ANTLR4_JAR_LOCATION="/home/ubuntu/antlr-4.13.2-complete.jar"
+RUN curl https://www.antlr.org/download/antlr-4.13.2-complete.jar --output $ANTLR4_JAR_LOCATION
