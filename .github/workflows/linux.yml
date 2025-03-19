@@ -41,6 +41,7 @@ jobs:
 
     container:
       image: ghcr.io/ltowarek/lingua-linux-devcontainer
+      options: --user root
       credentials:
         username: ${{ github.repository_owner }}
         password: ${{ secrets.GITHUB_TOKEN }}
