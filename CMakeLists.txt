@@ -29,6 +29,13 @@ antlr4_generate(
 
 include_directories( ${PROJECT_BINARY_DIR} ${ANTLR4_INCLUDE_DIR} ${ANTLR4_INCLUDE_DIR_poc_lexer} ${ANTLR4_INCLUDE_DIR_poc_parser} )
 
+find_package(LLVM CONFIG REQUIRED)
+
+include_directories(${LLVM_INCLUDE_DIRS})
+separate_arguments(LLVM_DEFINITIONS_LIST NATIVE_COMMAND ${LLVM_DEFINITIONS})
+add_definitions(${LLVM_DEFINITIONS_LIST})
+
 add_executable(poc poc.cpp ${ANTLR4_SRC_FILES_poc_lexer} ${ANTLR4_SRC_FILES_poc_parser})
 
-target_link_libraries(poc PRIVATE fmt::fmt antlr4_static)
+llvm_map_components_to_libnames(llvm_libs support core)
+target_link_libraries(poc PRIVATE fmt::fmt antlr4_static ${llvm_libs})
