@@ -39,3 +39,13 @@ add_executable(poc poc.cpp ${ANTLR4_SRC_FILES_poc_lexer} ${ANTLR4_SRC_FILES_poc_
 
 llvm_map_components_to_libnames(llvm_libs support core)
 target_link_libraries(poc PRIVATE fmt::fmt antlr4_static ${llvm_libs})
+
+include(CTest)
+enable_testing()
+
+find_package(GTest CONFIG REQUIRED)
+add_executable(hello_test hello_test.cpp)
+target_link_libraries(hello_test PRIVATE GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(hello_test)
